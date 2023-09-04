@@ -19,7 +19,7 @@ const SearchCity = () => {
     const [search, setSearch] = useState('');
     const [currentWeather, setCurrentWeather] = useState(null);
     const [forecast, setForecast] = useState(null);
-    const [fetchCityError, setFetchCityError] = useState(false);
+    const [fetchCityAPICode, setFetchCityAPICode] = useState(200);
 
 
     useEffect(() => {
@@ -44,7 +44,7 @@ const SearchCity = () => {
             .then(async (response) => {
                 if (response[0].status === 200) {
                     weatherResponse = await response[0].json();
-                    setFetchCityError(false);
+                    setFetchCityAPICode(200);
                     setCurrentWeather({ city: searchData, ...weatherResponse });
                     getCurrentForecast(weatherResponse);
 
@@ -52,7 +52,7 @@ const SearchCity = () => {
                 } else {
                     setCurrentWeather(null);
                     setForecast(null);
-                    setFetchCityError(true);
+                    setFetchCityAPICode(response[0].status);
                 }
                 //TODO we can enhance error reporting here for API calls
             }).catch(console.log);
@@ -75,7 +75,7 @@ const SearchCity = () => {
                     } else {
                         setForecast(null);
                         setCurrentWeather(null);
-                        setFetchCityError(true);
+                        setFetchCityAPICode(response[0].status);
                     }
                     //TODO we can enhance error reporting here for API calls
                 }).catch(console.log);
@@ -88,13 +88,29 @@ const SearchCity = () => {
     const searchLocation = async (searchData) => {
         setCurrentWeather(null);
         setForecast(null);
-        setFetchCityError(false);
+        setFetchCityAPICode(200);
         if (searchData.key === 'Enter') {
             searchUSCity(searchData.target.value);
         }
 
     };
 
+    const getAPIErrorMessage = (code) => {
+        var errorMsg = '';
+        switch (code) {
+            case 401:
+                errorMsg = 'Authorization Error with API Call';
+                break;
+            case 404:
+                errorMsg = 'Please enter a valid US City';
+                break;
+            default:
+                errorMsg = 'Something went wrong';
+                break;
+        }
+        return errorMsg;
+
+    }
 
     return (
         <div className="app">
@@ -108,9 +124,9 @@ const SearchCity = () => {
                     type="text" />
 
             </div>
-            {fetchCityError && <div className="error">
+            {(fetchCityAPICode != 200) && <div className="error">
 
-                Please enter a valid US City
+                {getAPIErrorMessage(fetchCityAPICode)}
             </div>}
             {currentWeather && <CurrentWeather data={currentWeather} />}
             {forecast && <Forecast data={forecast} />}
