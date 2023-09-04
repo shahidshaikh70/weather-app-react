@@ -8,12 +8,18 @@ import {
 } from "react-accessible-accordion";
 import "./forecast.css";
 
+/*
+
+  Forecast component to display Weather for week given a city reported from API weather service
+
+*/
+
 const WEEK_DAYS = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
 const Forecast = ({ data }) => {
   const dayInAWeek = new Date().getDay();
   const forecastDays = WEEK_DAYS.slice(dayInAWeek, WEEK_DAYS.length).concat(WEEK_DAYS.slice(0, dayInAWeek));
-  
+
   return (
     <>
       <label className="title">Daily</label>

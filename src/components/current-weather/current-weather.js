@@ -1,6 +1,13 @@
 import React from "react";
 import "./current-weather.css";
 
+/*
+
+  Current Weather component to display current Weather for given city reported from API weather service
+
+*/
+
+
 const CurrentWeather = ({ data }) => {
 
 

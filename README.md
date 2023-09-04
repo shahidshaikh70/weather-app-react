@@ -2,6 +2,23 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+
+# NOTES 
+
+Best practice NOT to expose any API keys in clear sight of your code. I added my API key to the .env file which I would have added in my .gitignore file so it NEVER got checked in, but for the purposes of this exercise LEFT it there.Clone from github (https://github.com/shahidshaikh70/weather-app-react/) once code is installed, run npm i (install modules) and then npm run start
+
+Downloaded all icons from the API providerApp uses local storage to store last searched US city so if you refresh page or relaunch app it will show you weather for that city
+
+Error handling if user enters a invalid US city as App is ONLY for searching US cities using the APISeparation of concern as SearchCity is a component that encapsulates the requirements to involve API and show results. It renders using additional components to reports weather and forecast to again have a separation of concern
+
+Further things I could have done:
+
+Error reporting on fetch calls to API to handle 500s or 400s errors to use rather than console.log
+Unit tests
+Further refactor to enable abstraction of the service API and not be tied to SearchCity component to handle use case of changing weather API in the feature and not impacting this component. 
+
+As part of above, possibly cache the API calls get icon and remove having it as part of the source code so it any allows one to change weather service provider
+
 ## Available Scripts
 
 In the project directory, you can run:
