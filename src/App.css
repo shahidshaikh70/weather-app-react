@@ -1,0 +1,41 @@
+.container {
+  max-width: 1080px;
+  margin: 20px auto;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.app {
+  width: 100%;
+  position: relative;
+  
+  color: #fff;
+}
+
+
+.app .search {
+  text-align: center;
+  padding: 1rem;
+}
+
+.app input {
+  padding: .7rem 1.5rem;
+  font-size: 1.2rem;
+  border-radius: 25px;
+  
+  
+  
+}
+
+.error {
+  width: auto;
+  border-radius: 6px;
+  text-align: center;
+  box-shadow: 10px -2px 20px 2px rgb(0 0 0 / 30%);
+  color: red;
+  margin: 20px auto 0 auto;
+  
+  padding: 10px 20px 20px 20px;
+}
+
+
